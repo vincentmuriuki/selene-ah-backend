@@ -7,7 +7,7 @@ import signupFactory from '../mocks/factories/userFactory';
 import articlesFactory from '../mocks/factories/articlesFactory';
 import articlesController from '../../server/controllers/articlesController';
 import models from '../../server/models';
-import getRandomCategory from '../../server/helpers/checkCategory';
+import getRandomCategory from '../../server/helpers/getCategory';
 
 chai.should();
 chai.use(chaiHttp);
