@@ -3,11 +3,10 @@
  *  field needed to create an article
  */
 class ArticleValidation {
-  //title, body, categoryId, published
   /**
    * @param {object} req - Request sent to the route
    * @param {object} res - Response sent from the middleware
-   * @param {object} next - Error handler
+   * @param {object} next -
    * @returns {object} - object representing response message
    */
   static validateArticleFields(req, res, next) {
@@ -32,6 +31,7 @@ class ArticleValidation {
     }
     return next();
   }
+
 }
 
 export default ArticleValidation;

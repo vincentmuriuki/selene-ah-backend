@@ -51,11 +51,25 @@ const  isSocialMediaEmail = (email) => {
   return email.includes('@facebook.com') || email.includes('@twitter.com');
 };
 
+
+/**
+ * @description Validates a text field
+ * @param {String} text
+ * @return {Boolean} returns true or false
+ */
+const validateText = (text) => {
+  if (text.length >= 2 && text.length <= 200 && !!text.trim()) {
+    return true;
+  }
+  return false;
+};
+
 export default {
   isEmailValid,
   isUsernameValid,
   isNameValid,
   isPasswordValid,
   isUUIDValid,
-  isSocialMediaEmail
+  isSocialMediaEmail,
+  validateText
 };

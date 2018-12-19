@@ -35,7 +35,8 @@ export default {
         onDelete: 'CASCADE',
         references: {
           model: 'Articles',
-          key: 'id'
+          key: 'id',
+          as: 'articleId'
         }
       }
     });
