@@ -42,7 +42,7 @@ class FollowerController {
       const { id } = req.params;
       const userId = req.user.id;
       await Follower.destroy({
-        where: {userId: userId,
+        where: {userId,
         followerId: id}
       });
       return res.status(200).json({
@@ -63,10 +63,15 @@ class FollowerController {
    * @returns {object} - get user
    */
   static async getFollowers(req, res, next, id) {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 25;
+    const offset = limit * (page - 1);
     try {
       const userId = id;
       const followers = await Follower.findAll({
-        where: {userId: userId}
+        where: {userId},
+        limit,
+        offset
       });
       return followers.length >= 1 ? res.status(200).json({
         success: true,
@@ -90,9 +95,14 @@ class FollowerController {
    * @returns {object} - get user
    */
   static async getFollowees(req, res, next, id) {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 25;
+    const offset = limit * (page - 1);
     try {
       const followees = await Follower.findAll({
-        where: {followerId: id}
+        where: {followerId: id},
+        limit,
+        offset
       });
       return followees.length >= 1 ? res.status(200).json({
         success: true,

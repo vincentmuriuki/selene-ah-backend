@@ -4,6 +4,7 @@ import generateUniqueSlug from '../helpers/generateUniqueSlug';
 const { Article, Category, User } = db;
 /**
 * @description class will implement CRUD functionalities for articles
+*
 * @class ArticleController
 */
 class ArticlesController {
@@ -94,6 +95,9 @@ class ArticlesController {
  * @returns {object} - object representing response message
  */
   static async getAllArticles(req, res, next) {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 25;
+    const offset = limit * (page - 1);
     try {
       const articles = await Article.findAndCountAll(
         {
@@ -103,6 +107,8 @@ class ArticlesController {
             attributes: ['userName', 'imageUrl', 'bio', 'dateOfBirth']
 
           }],
+          limit,
+          offset
         });
 
       if (!articles || articles.count == 0) {
